@@ -4,7 +4,7 @@
 // Licensed under Apache License v2.0
 
 public import Benchmark
-import Clock_Primitives
+import Clock
 
 extension Benchmark.Clock {
     /// Measures empty-read overhead without executing a benchmark workload.

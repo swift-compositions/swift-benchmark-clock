@@ -5,8 +5,8 @@
 
 import Benchmark
 import Benchmark_Clock
-import Cardinal_Primitives_Standard_Library_Integration
-import Clock_Primitives
+import Clock
+import Clocks
 import Testing
 import Formatter
 
@@ -16,7 +16,7 @@ struct `Benchmark Clock Tests` {
     struct Unit {
         @Test
         func `fake clock observes exactly the explicit advancement`() throws {
-            let clock = Clock_Primitives.Clock.Test()
+            let clock = Clock::Clock.Test()
             let probe = Benchmark.Clock.probe(clock)
             let plan = try Benchmark.Plan(warmup: 0, measurements: 1)
             let workload = Benchmark.Workload<Void, Never>(
@@ -38,7 +38,7 @@ struct `Benchmark Clock Tests` {
     struct `Edge Case` {
         @Test
         func `calibration floor prevents negative adjusted durations`() {
-            let clock = Clock_Primitives.Clock.Test()
+            let clock = Clock::Clock.Test()
             clock.minimumResolution = .nanoseconds(5)
             let calibration = Benchmark.Clock.calibrate(clock)
             let observation = Benchmark.Clock.Observation(
