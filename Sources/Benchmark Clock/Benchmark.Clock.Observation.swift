@@ -4,7 +4,7 @@
 // Licensed under Apache License v2.0
 
 public import Benchmark
-public import Time_Format_Primitives
+public import Formatter
 
 extension Benchmark.Clock {
     /// One typed duration observation with calibration and contamination provenance.
@@ -28,7 +28,9 @@ extension Benchmark.Clock {
 }
 
 extension Benchmark.Clock.Observation {
-    public func formatted(_ format: Time.Format = .duration) -> String {
+    public func formatted(
+        _ format: Formatter::Formatter.Duration<Formatter::Formatter.Number>
+    ) -> String {
         adjusted.formatted(format)
     }
 }

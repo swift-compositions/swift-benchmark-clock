@@ -8,6 +8,7 @@ import Benchmark_Clock
 import Cardinal_Primitives_Standard_Library_Integration
 import Clock_Primitives
 import Testing
+import Formatter
 
 @Suite
 struct `Benchmark Clock Tests` {
@@ -50,7 +51,9 @@ struct `Benchmark Clock Tests` {
             #expect(calibration.resolution.observed == nil)
             #expect(calibration.floor == .nanoseconds(5))
             #expect(observation.adjusted == .zero)
-            #expect(observation.formatted() == "0 ns")
+            #expect(observation.formatted(
+                Formatter::Formatter.Duration(numeric: Formatter::Formatter.Number())
+            ) == "0 ns")
         }
     }
 

@@ -16,7 +16,7 @@ let package = Package(
     ],
     dependencies: [
         .package(
-            url: "https://github.com/swift-primitives/swift-benchmark.git",
+            url: "https://github.com/swift-molecules/swift-benchmark.git",
             branch: "main"
         ),
         .package(
@@ -28,8 +28,9 @@ let package = Package(
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-time-primitives.git",
-            branch: "main"
+            url: "https://github.com/swift-atoms/swift-formatter.git",
+            branch: "main",
+            traits: ["Time", "Number"]
         ),
     ],
     targets: [
@@ -38,13 +39,14 @@ let package = Package(
             dependencies: [
                 .product(name: "Benchmark", package: "swift-benchmark"),
                 .product(name: "Clock Primitives", package: "swift-clock-primitives"),
-                .product(name: "Time Format Primitives", package: "swift-time-primitives"),
+                .product(name: "Formatter", package: "swift-formatter"),
             ]
         ),
         .testTarget(
             name: "Benchmark Clock Tests",
             dependencies: [
                 .target(name: "Benchmark Clock"),
+                .product(name: "Formatter", package: "swift-formatter"),
                 .product(name: "Benchmark", package: "swift-benchmark"),
                 .product(
                     name: "Cardinal Primitives Standard Library Integration",
