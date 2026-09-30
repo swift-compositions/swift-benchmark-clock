@@ -11,7 +11,7 @@ extension Benchmark.Clock {
     public static func calibrate<C: _Concurrency.Clock & Sendable>(
         _ clock: C
     ) -> Calibration
-    where C.Duration == Duration, C.Instant: Sendable {
+    where C.Duration == Swift.Duration, C.Instant: Sendable {
         var observations: [Duration] = []
         observations.reserveCapacity(32)
         for _ in 0..<32 {

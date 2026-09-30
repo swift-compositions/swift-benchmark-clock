@@ -13,7 +13,7 @@ extension Benchmark.Clock {
         calibration: Calibration = .zero,
         condition: Condition = .clean
     ) -> Benchmark.Probe<C.Instant, Observation, Never>
-    where C.Duration == Duration, C.Instant: Sendable {
+    where C.Duration == Swift.Duration, C.Instant: Sendable {
         .init(
             start: { .success(clock.now) },
             stop: { start in
