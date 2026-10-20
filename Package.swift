@@ -20,7 +20,6 @@ let package = Package(
             branch: "main"
         ),
         .package(url: "https://github.com/swift-atoms/swift-clock.git", branch: "main"),
-        .package(url: "https://github.com/swift-compositions/swift-clocks.git", branch: "main"),
         .package(
             url: "https://github.com/swift-atoms/swift-formatter.git",
             branch: "main",
@@ -43,7 +42,7 @@ let package = Package(
                 .product(name: "Formatter", package: "swift-formatter"),
                 .product(name: "Benchmark", package: "swift-benchmark"),
                 .product(name: "Clock", package: "swift-clock"),
-                .product(name: "Clocks", package: "swift-clocks"),
+                .product(name: "Clock Concurrency", package: "swift-clock"),
             ]
         ),
     ],
