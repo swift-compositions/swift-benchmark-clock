@@ -8,7 +8,23 @@ import Benchmark_Clock
 import Clock
 import Clock_Concurrency
 import Formatter
+import Synchronization
 import Testing
+
+/// A clock a synchronous workload can move: `Clock.Test.advance` is async, and a workload's operation is not.
+private final class Stepping: _Concurrency.Clock, Sendable {
+    private let current = Mutex(ContinuousClock.now)
+
+    var now: ContinuousClock.Instant { current.withLock { $0 } }
+
+    var minimumResolution: Swift::Duration { .zero }
+
+    func advance(by duration: Swift::Duration) {
+        current.withLock { $0 = $0.advanced(by: duration) }
+    }
+
+    func sleep(until deadline: ContinuousClock.Instant, tolerance: Swift::Duration?) async throws {}
+}
 
 @Suite
 struct `Benchmark Clock Tests` {
@@ -16,7 +32,7 @@ struct `Benchmark Clock Tests` {
     struct Unit {
         @Test
         func `fake clock observes exactly the explicit advancement`() throws {
-            let clock = Clock::Clock.Test()
+            let clock = Stepping()
             let probe = Benchmark.Clock.probe(clock)
             let plan = try Benchmark.Plan(warmup: 0, measurements: 1)
             let workload = Benchmark.Workload<Void, Never>(
