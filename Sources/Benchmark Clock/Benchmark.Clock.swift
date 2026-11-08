@@ -1,5 +1,5 @@
 public import Benchmark
-import Clock
+public import Clock
 
 extension Benchmark {
     public enum Clock {}
