@@ -54,12 +54,12 @@ extension Benchmark.Clock {
     ) -> Benchmark.Evaluation<Observation> {
         .init { current, baseline in
             let difference = current.adjusted - baseline.adjusted
-            if difference > tolerance {
-                return .regressed
+            return if difference > tolerance {
+                .regressed
             } else if difference < .zero - tolerance {
-                return .improved
+                .improved
             } else {
-                return .unchanged
+                .unchanged
             }
         }
     }
